@@ -13,7 +13,7 @@ export default function AlertsPage() {
   const [path, setPath] = useState("/alerts");
   useEffect(() => { setPath(window.location.pathname); }, []);
   return (
-    <div className="min-h-screen w-full flex flex-col" style={{ background: "#000000" }}>
+    <div className="min-h-screen w-full flex flex-col" style={{ background: "var(--background)" }}>
       <div className="sticky top-0 z-50"></div>
       <main className="flex-1 px-6 py-8 max-w-[1400px] mx-auto w-full">
         <div className="flex items-center gap-3 mb-8">
@@ -29,12 +29,12 @@ export default function AlertsPage() {
         </div>
         <div className="flex flex-col gap-3">
           {ACTIVE_ALERTS.map((alert) => (
-            <div key={alert.id} className="rounded-xl border p-5 flex items-start gap-4" style={{ background: "#111112", borderColor: alert.color + "33" }}>
+            <div key={alert.id} className="rounded-xl border p-5 flex items-start gap-4" style={{ background: "var(--surface-2)", borderColor: alert.color + "33" }}>
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xs font-mono text-neutral-500 min-w-[60px]">{alert.time}</span>
                   <span className="text-sm font-bold text-white">{alert.name}</span>
-                  <span className={"text-[10px] font-bold px-2 py-0.5 rounded uppercase " + (alert.impact === "high" ? "bg-red-400/10 text-red-400" : alert.impact === "medium" ? "bg-amber-400/10 text-amber-400" : "bg-neutral-600/10 text-neutral-500")}>{alert.impact}</span>
+                  <span className={"text-[10px] font-bold px-2 py-0.5 rounded uppercase " + (alert.impact === "high" ? "bg-red-400/10 text-red-400" : alert.impact === "medium" ? "bg-amber-400/10 text-amber-400" : "bg-neutral-600/10 text-muted")}>{alert.impact}</span>
                   <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded" style={{ background: alert.color + "22", color: alert.color }}>{alert.status}</span>
                 </div>
                 <p className="text-xs text-neutral-400 leading-relaxed">{alert.note}</p>

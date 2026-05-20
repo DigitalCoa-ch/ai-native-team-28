@@ -56,7 +56,7 @@ export default function BearishPage() {
   const [path, setPath] = useState("/bearish");
   useEffect(() => { setPath(window.location.pathname); }, []);
   return (
-    <div className="min-h-screen w-full flex flex-col" style={{ background: "#000000" }}>
+    <div className="min-h-screen w-full flex flex-col" style={{ background: "var(--background)" }}>
       <div className="sticky top-0 z-50"></div>
       <main className="flex-1 px-6 py-8 max-w-[1400px] mx-auto w-full">
         <div className="flex items-center gap-3 mb-8">
@@ -68,15 +68,15 @@ export default function BearishPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {BEARISH_ITEMS.map((item) => (
-            <div key={item.symbol} className="rounded-xl border p-5" style={{ background: "#111112", borderColor: "#EF444433" }}>
+            <div key={item.symbol} className="rounded-xl border p-5" style={{ background: "var(--surface-2)", borderColor: "#EF444433" }}>
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <div className="text-xs font-mono text-neutral-500">{item.symbol}</div>
-                  <div className="text-white font-bold mt-0.5">{item.name}</div>
+                  <div className="text-xs font-mono text-muted">{item.symbol}</div>
+                  <div className="text-primary font-bold mt-0.5">{item.name}</div>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <span className="text-xs font-bold px-2 py-1 rounded bg-red-400/10 text-red-400">{item.sentiment}</span>
-                  <span className="text-[10px] font-mono text-neutral-500">{item.strength}</span>
+                  <span className="text-[10px] font-mono text-muted">{item.strength}</span>
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-3 mb-4">

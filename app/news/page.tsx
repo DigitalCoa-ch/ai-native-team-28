@@ -25,7 +25,7 @@ function SentimentBar({ score }: { score: number }) {
   const pct = clamp((score + 100) / 2, 0, 100);
   const col = score > 10 ? "#BFFF00" : score < -10 ? "#FF3B3B" : "#6B7280";
   return (
-    <div className="w-full h-1.5 rounded-full bg-neutral-800 overflow-hidden">
+    <div className="w-full h-1.5 rounded-full bg-[var(--surface)] overflow-hidden">
       <div className="h-full rounded-full" style={{ width: `${pct}%`, background: col }} />
     </div>
   );
@@ -36,18 +36,18 @@ function PredCard({ p }: { p: MarketPrediction }) {
     bullish:  { text:"text-lime-400",   arrow:"↗", badgeBg:"bg-lime-400/10",   badgeText:"text-lime-400",   confColor:"#BFFF00" },
     bearish:  { text:"text-red-400",    arrow:"↘", badgeBg:"bg-red-400/10",    badgeText:"text-red-400",   confColor:"#FF3B3B" },
     volatile: { text:"text-amber-400",  arrow:"↕", badgeBg:"bg-amber-400/10", badgeText:"text-amber-400", confColor:"#FFB800" },
-    neutral:  { text:"text-neutral-400",arrow:"→", badgeBg:"bg-neutral-400/10",badgeText:"text-neutral-400",confColor:"#9CA3AF" },
+    neutral:  { text:"text-muted",arrow:"→", badgeBg:"bg-neutral-400/10",badgeText:"text-muted",confColor:"#9CA3AF" },
   };
   const c = DIR[p.direction] ?? DIR.neutral;
   return (
-    <div className="rounded-xl border-l-4 p-4 bg-[#111112]" style={{ borderLeftColor: c.confColor + "66" }}>
+    <div className="rounded-xl border-l-4 p-4 bg-[var(--surface-2)]" style={{ borderLeftColor: c.confColor + "66" }}>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className={`text-lg ${c.text}`}>{c.arrow}</span>
           <span className={`text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded ${c.badgeBg} ${c.badgeText}`}>{p.direction}</span>
           <span className="text-[10px] font-mono text-neutral-500 ml-1">{p.timeframe}</span>
         </div>
-        <span className="text-[10px] font-mono text-neutral-600">{timeAgo(p.timestamp)}</span>
+        <span className="text-[10px] font-mono text-muted">{timeAgo(p.timestamp)}</span>
       </div>
       <h3 className={`text-sm font-bold mb-2 ${c.text}`}>{p.headline}</h3>
       <p className="text-xs text-neutral-400 leading-relaxed mb-4">{p.reasoning}</p>
@@ -62,7 +62,7 @@ function PredCard({ p }: { p: MarketPrediction }) {
         </div>
         <div>
           <div className="text-[10px] text-neutral-500 uppercase tracking-wider mb-1">Sources</div>
-          <div className="text-sm font-mono text-neutral-400">{p.newsSources.length}</div>
+          <div className="text-sm font-mono text-muted">{p.newsSources.length}</div>
         </div>
       </div>
       {p.sectorImpact.length > 0 && (
@@ -71,22 +71,22 @@ function PredCard({ p }: { p: MarketPrediction }) {
             <span key={i} className={`text-[10px] font-mono px-2 py-1 rounded ${
               s.impact === "positive" ? "bg-emerald-400/10 text-emerald-400"
               : s.impact === "negative" ? "bg-red-400/10 text-red-400"
-              : "bg-neutral-700/50 text-neutral-400"}`}>{s.sector}</span>
+              : "bg-neutral-700/50 text-muted"}`}>{s.sector}</span>
           ))}
         </div>
       )}
-      <div className="mt-3 pt-3 border-t border-white/5 flex flex-wrap gap-x-3 gap-y-1">
-        <span className="text-[10px] text-neutral-600">src:</span>
-        {p.newsSources.map(s => <span key={s} className="text-[10px] font-mono text-neutral-500">{s}</span>)}
+      <div className="mt-3 pt-3 border-t border-[var(--border)] flex flex-wrap gap-x-3 gap-y-1">
+        <span className="text-[10px] text-muted">src:</span>
+        {p.newsSources.map(s => <span key={s} className="text-[10px] font-mono text-muted">{s}</span>)}
       </div>
     </div>
   );
 }
 
 function NewsCard({ item }: { item: NewsItem }) {
-  const sent = item.sentiment === "bullish" ? "text-lime-400" : item.sentiment === "bearish" ? "text-red-400" : "text-neutral-400";
+  const sent = item.sentiment === "bullish" ? "text-lime-400" : item.sentiment === "bearish" ? "text-red-400" : "text-muted";
   return (
-    <a href={item.url} target="_blank" rel="noopener noreferrer" className="block p-4 border-b border-white/5 hover:bg-white/[0.03] transition-colors group">
+    <a href={item.url} target="_blank" rel="noopener noreferrer" className="block p-4 border-b border-[var(--border)] hover:bg-white/[0.03] transition-colors group">
       <div className="flex items-start gap-3 mb-2">
         <div className="flex-shrink-0">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -98,8 +98,8 @@ function NewsCard({ item }: { item: NewsItem }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono text-neutral-500">{item.source}</span>
-            <span className="text-[10px] font-mono text-neutral-700">{timeAgo(item.publishedAt)}</span>
+            <span className="text-[10px] font-mono text-muted">{item.source}</span>
+            <span className="text-[10px] font-mono text-muted">{timeAgo(item.publishedAt)}</span>
           </div>
           <h4 className="text-sm font-semibold text-white group-hover:text-lime-400 transition-colors leading-snug line-clamp-2">{item.title}</h4>
         </div>
@@ -112,7 +112,7 @@ function NewsCard({ item }: { item: NewsItem }) {
       {item.tags.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-2 ml-9">
           {item.tags.slice(0,3).map(tag => (
-            <span key={tag} className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-neutral-600">{tag}</span>
+            <span key={tag} className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[var(--surface-2)] text-muted">{tag}</span>
           ))}
         </div>
       )}
@@ -123,10 +123,10 @@ function NewsCard({ item }: { item: NewsItem }) {
 function SrcDot({ status, count, name }: { status: string; count: number; name: string }) {
   const dot = status === "ok" ? "bg-emerald-400" : status === "partial" ? "bg-amber-400" : "bg-red-400";
   return (
-    <div className="flex items-center gap-1.5 text-[10px] font-mono text-neutral-500">
+    <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted">
       <span className={`w-1.5 h-1.5 rounded-full ${dot}`} />
       <span>{name.split(" ")[0]}</span>
-      <span className="text-neutral-700">{count > 0 ? count : "—"}</span>
+      <span className="text-muted">{count > 0 ? count : "—"}</span>
     </div>
   );
 }
@@ -134,7 +134,7 @@ function SrcDot({ status, count, name }: { status: string; count: number; name: 
 function Skeleton() {
   return (
     <div className="space-y-3 animate-pulse">
-      {[1,2,3,4,5].map(i => <div key={i} className="h-18 bg-neutral-900 rounded-xl" />)}
+      {[1,2,3,4,5].map(i => <div key={i} className="h-18 bg-[var(--surface)] rounded-xl" />)}
     </div>
   );
 }
@@ -178,23 +178,23 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen" style={{ background: "#000" }}>
-      <header className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-[var(--border)]">
         <div className="flex items-center gap-3">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <rect x="2" y="2" width="20" height="20" rx="3" stroke="#BFFF00" strokeWidth="1.5"/>
             <path d="M7 13l4-4 4 4 6-6" stroke="#BFFF00" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
-          <span className="text-white font-bold tracking-tight text-lg">MACRO</span>
+          <span className="text-primary font-bold tracking-tight text-lg">MACRO</span>
           <span className="text-lime-400 font-bold tracking-tight text-lg">INTELLIGENCE</span>
           <span className="text-[10px] font-mono text-neutral-600 ml-1">v2.0</span>
         </div>
         <div className="flex items-center gap-5">
-          <span className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500">
+          <span className="inline-flex items-center gap-1.5 text-xs font-mono text-muted">
             <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
             LIVE
           </span>
-          {lastUp && <span className="text-xs font-mono text-neutral-600">Updated {lastUp}</span>}
-          <button onClick={refresh} className="text-xs font-mono text-neutral-400 hover:text-lime-400 transition-colors px-3 py-1 rounded border border-white/10 hover:border-lime-400/40">
+          {lastUp && <span className="text-xs font-mono text-muted">Updated {lastUp}</span>}
+          <button onClick={refresh} className="text-xs font-mono text-neutral-400 hover:text-lime-400 transition-colors px-3 py-1 rounded border border-[var(--border)] hover:border-lime-400/40">
             ↻ Refresh
           </button>
         </div>
@@ -221,14 +221,14 @@ export default function NewsPage() {
           {loading ? <Skeleton /> : data?.predictions?.length ? (
             data.predictions.map(p => <PredCard key={p.id} p={p} />)
           ) : (
-            <div className="rounded-xl p-8 border border-white/10 bg-[#111112] text-center">
+            <div className="rounded-xl p-8 border border-[var(--border)] bg-[var(--surface-2)] text-center">
               <div className="text-3xl mb-3">📡</div>
-              <p className="text-sm text-neutral-500">Analyzing news flow…</p>
+              <p className="text-sm text-muted">Analyzing news flow…</p>
               <p className="text-xs text-neutral-700 mt-1">Predictions load after first fetch</p>
             </div>
           )}
 
-          <div className="rounded-xl p-4 border border-white/10 bg-[#111112]">
+          <div className="rounded-xl p-4 border border-[var(--border)] bg-[var(--surface-2)]">
             <div className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase mb-3">Feed Status</div>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
               {data?.sources.map(s => <SrcDot key={s.name} status={s.status} count={s.itemCount} name={s.name} />)}
@@ -236,7 +236,7 @@ export default function NewsPage() {
           </div>
 
           {data?.news && data.news.length > 0 && (
-            <div className="rounded-xl p-4 border border-white/10 bg-[#111112]">
+            <div className="rounded-xl p-4 border border-[var(--border)] bg-[var(--surface-2)]">
               <div className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase mb-3">Sentiment Mix</div>
               <div className="space-y-2">
                 {(["bullish","bearish","neutral"] as const).map(s => {
@@ -246,7 +246,7 @@ export default function NewsPage() {
                   return (
                     <div key={s} className="flex items-center gap-3">
                       <span className="text-[10px] font-mono text-neutral-500 w-16 capitalize">{s}</span>
-                      <div className="flex-1 h-1.5 bg-neutral-900 rounded-full overflow-hidden">
+                      <div className="flex-1 h-1.5 bg-[var(--surface)] rounded-full overflow-hidden">
                         <div className="h-full rounded-full" style={{ width:`${pct}%`, background:col }} />
                       </div>
                       <span className="text-[10px] font-mono text-neutral-400 w-8 text-right">{n}</span>
@@ -278,8 +278,8 @@ export default function NewsPage() {
                     filter === f
                       ? f === "bullish" ? "bg-lime-400/20 text-lime-400"
                       : f === "bearish" ? "bg-red-400/20 text-red-400"
-                      : "bg-white/10 text-white"
-                      : "bg-neutral-900 text-neutral-500 hover:text-neutral-300"
+                      : "bg-[var(--surface-2)] text-white"
+                      : "bg-[var(--surface)] text-neutral-500 hover:text-secondary"
                   }`}
                 >
                   {f} {data ? (`(${counts[f as keyof typeof counts]})`) : ""}
@@ -289,15 +289,15 @@ export default function NewsPage() {
           </div>
 
           {loading ? <Skeleton /> : shown.length > 0 ? (
-            <div className="rounded-xl border border-white/10 bg-[#111112] overflow-hidden">
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-2)] overflow-hidden">
               <div className="divide-y divide-white/5">
                 {shown.map(item => <NewsCard key={item.id} item={item} />)}
               </div>
             </div>
           ) : (
-            <div className="rounded-xl p-12 border border-white/10 bg-[#111112] text-center">
+            <div className="rounded-xl p-12 border border-[var(--border)] bg-[var(--surface-2)] text-center">
               <div className="text-3xl mb-3">📰</div>
-              <p className="text-sm text-neutral-500">No news matching filter</p>
+              <p className="text-sm text-muted">No news matching filter</p>
             </div>
           )}
         </section>
