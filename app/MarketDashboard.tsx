@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import NavBar from "./components/NavBar";
 
 type Impact = "high" | "medium" | "low";
 interface EconEvent { time: string; country: string; name: string; impact: Impact; forecast?: string; previous?: string; actual?: string; description?: string; whyItMatters?: string; }
@@ -194,9 +193,7 @@ export default function MarketDashboard() {
 
   return (
     <div className="min-h-screen w-full flex flex-col" style={{ background: "#000000" }}>
-      <div className="sticky top-0 z-50" style={{ background: "#0A0A0A" }}>
-        <NavBar currentPath={path} />
-        <header className="flex items-center justify-between px-6 py-3 border-b border-white/10">
+      <header className="flex items-center justify-between px-6 py-3 border-b border-white/10" style={{ background: "#0A0A0A" }}>
           <div className="flex items-center gap-3">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <rect x="2" y="2" width="20" height="20" rx="3" stroke="#BFFF00" strokeWidth="1.5"/>
@@ -212,7 +209,6 @@ export default function MarketDashboard() {
             <span className="text-xs font-mono text-neutral-500">May 19, 2026</span>
           </div>
         </header>
-      </div>
 
       <main className="grid grid-cols-3 gap-5 p-6 max-w-[1600px] mx-auto">
         {/* Column 1: Calendar */}

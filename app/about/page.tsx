@@ -1,5 +1,4 @@
 "use client";
-import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";
 
 export default function AboutPage() {
@@ -7,7 +6,7 @@ export default function AboutPage() {
   useEffect(() => { setPath(window.location.pathname); }, []);
   return (
     <div className="min-h-screen w-full flex flex-col" style={{ background: "#000000" }}>
-      <div className="sticky top-0 z-50"><NavBar currentPath={path} /></div>
+      <div className="sticky top-0 z-50"></div>
       <main className="flex-1 px-6 py-8 max-w-[1400px] mx-auto w-full">
         <div className="flex items-center gap-3 mb-8">
           <span className="text-3xl">&#x2139;</span>

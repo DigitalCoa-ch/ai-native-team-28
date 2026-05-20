@@ -7,6 +7,7 @@ const NAV_GROUPS = [
     label: "Pages",
     items: [
       { label: "Home",     href: "/",       emoji: "🏠" },
+      { label: "News",     href: "/news",   emoji: "📡" },
       { label: "Bullish",  href: "/bullish" },
       { label: "Bearish",  href: "/bearish" },
       { label: "Alerts",   href: "/alerts", badge: "LIVE" },
