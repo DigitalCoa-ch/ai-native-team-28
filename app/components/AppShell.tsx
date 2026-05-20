@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ThemeProvider } from "./ThemeProvider";
 import NavBar from "./NavBar";
 
-interface AppShellProps {
-  children: React.ReactNode;
-}
-
-export default function AppShell({ children }: AppShellProps) {
-  const [path, setPath] = useState("/");
-  useEffect(() => { setPath(window.location.pathname); }, []);
+export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <ThemeProvider>
       <NavBar />
       <div className="flex-1">{children}</div>
-    </>
+    </ThemeProvider>
   );
 }

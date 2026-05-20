@@ -98,7 +98,7 @@ function ScenarioCard({ scenario }: { scenario: Scenario }) {
 
 function ExpandableEventCard({ event }: { event: EconEvent }) {
   const [open, setOpen] = useState(false);
-  return <div className="border-b border-white/5 last:border-0"><button onClick={() => setOpen(o => !o)} className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors text-left"><div className="flex items-center gap-3"><span className="text-[10px] font-mono text-neutral-500 min-w-[48px]">{event.time}</span><span className="text-xs font-bold text-neutral-400">{event.country}</span><ImpactDot level={event.impact}/></div><div className="flex items-center gap-2"><div className="text-right"><div className="text-xs text-white">{event.name}</div>{event.forecast && event.forecast !== "—" && <div className="text-[10px] font-mono text-neutral-600">Cons:{event.forecast}&nbsp;&nbsp;Prev:{event.previous}</div>}</div><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={"text-neutral-500 flex-shrink-0 transition-transform duration-200 " + (open ? "rotate-180" : "")}><polyline points="6 9 12 15 18 9"/></svg></div></button>{open && <div className="px-4 pb-4 pt-1 border-t border-white/5" style={{ background: "#0A0A0A" }}>{event.description && <p className="text-xs text-neutral-400 leading-relaxed mb-3">{event.description}</p>}{event.whyItMatters && <div className="rounded-lg p-3 border" style={{ background: "#111112", borderColor: "#2A2A2A" }}><div className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase mb-1">Why It Matters</div><p className="text-xs text-neutral-300 leading-relaxed">{event.whyItMatters}</p></div>}<div className="mt-3 grid grid-cols-3 gap-2">{[{ label: "Forecast", value: event.forecast || "—" }, { label: "Previous", value: event.previous || "—" }, { label: "Actual", value: event.actual || "—" }].map(({ label, value }) => <div key={label} className="rounded-lg p-2 text-center" style={{ background: "#111112" }}><div className="text-[10px] text-neutral-500 uppercase tracking-wider mb-1">{label}</div><div className="text-sm font-mono font-bold text-white">{value}</div></div>)}</div></div>}</div>;
+  return <div className="border-b border-white/5 last:border-0"><button onClick={() => setOpen(o => !o)} className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors text-left"><div className="flex items-center gap-3"><span className="text-[10px] font-mono text-neutral-500 min-w-[48px]">{event.time}</span><span className="text-xs font-bold text-neutral-400">{event.country}</span><ImpactDot level={event.impact}/></div><div className="flex items-center gap-2"><div className="text-right"><div className="text-xs text-white">{event.name}</div>{event.forecast && event.forecast !== "—" && <div className="text-[10px] font-mono text-neutral-600">Cons:{event.forecast}&nbsp;&nbsp;Prev:{event.previous}</div>}</div><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={"text-neutral-500 flex-shrink-0 transition-transform duration-200 " + (open ? "rotate-180" : "")}><polyline points="6 9 12 15 18 9"/></svg></div></button>{open && <div className="px-4 pb-4 pt-1 border-t border-white/5" style={{ background: "var(--surface)" }}>{event.description && <p className="text-xs text-neutral-400 leading-relaxed mb-3">{event.description}</p>}{event.whyItMatters && <div className="rounded-lg p-3 border" style={{ background: "#111112", borderColor: "#2A2A2A" }}><div className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase mb-1">Why It Matters</div><p className="text-xs text-neutral-300 leading-relaxed">{event.whyItMatters}</p></div>}<div className="mt-3 grid grid-cols-3 gap-2">{[{ label: "Forecast", value: event.forecast || "—" }, { label: "Previous", value: event.previous || "—" }, { label: "Actual", value: event.actual || "—" }].map(({ label, value }) => <div key={label} className="rounded-lg p-2 text-center" style={{ background: "var(--surface-2)" }}><div className="text-[10px] text-neutral-500 uppercase tracking-wider mb-1">{label}</div><div className="text-sm font-mono font-bold text-white">{value}</div></div>)}</div></div>}</div>;
 }
 
 // ─── Live market data hook ────────────────────────────────────────────────────
@@ -143,7 +143,7 @@ function TickerTape({ data }: { data: MarketData }) {
   // Duplicate for seamless loop
   const doubled = [...items, ...items];
   return (
-    <div className="w-full overflow-hidden border-b border-white/10" style={{ background: "#0A0A0A" }}>
+    <div className="w-full overflow-hidden border-b border-white/10" style={{ background: "var(--surface)" }}>
       <div className="flex gap-8 py-2" style={{ width: "max-content", animation: "scroll 40s linear infinite" }}>
         {doubled.map((item, i) => (
           <span key={i} className="flex items-center gap-2 flex-shrink-0">
@@ -219,12 +219,12 @@ export default function MarketDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden" style={{ background: "#000000" }}>
+    <div className="min-h-screen w-full relative overflow-hidden" style={{ background: "var(--background)" }}>
       {/* Live ticker tape */}
       {data && <TickerTape data={data} />}
 
       {/* Top status bar */}
-      <div className="relative z-10 flex items-center justify-between px-6 py-2 border-b border-white/10" style={{ background: "#00000088" }}>
+      <div className="relative z-10 flex items-center justify-between px-6 py-2 border-b border-white/10" style={{ background: "rgba(0,0,0,0.3)" }}>
         <div className="flex items-center gap-3">
           <LiveBadge />
           {loading ? (
@@ -250,7 +250,7 @@ export default function MarketDashboard() {
 
       {/* Market bias banner */}
       {data && data.crypto.BTC && (
-        <div className="relative z-10 flex items-center gap-4 px-6 py-2 border-b border-white/5" style={{ background: "#0A0A0A" }}>
+        <div className="relative z-10 flex items-center gap-4 px-6 py-2 border-b border-white/5" style={{ background: "var(--surface)" }}>
           <span className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">Quick Scan</span>
           {data.crypto.BTC && <span className="text-xs font-mono">BTC <span className={pctColor(data.crypto.BTC.change24h)}>{data.crypto.BTC.change24h >= 0 ? "+" : ""}{data.crypto.BTC.change24h.toFixed(2)}%</span></span>}
           {data.crypto.ETH && <span className="text-xs font-mono">ETH <span className={pctColor(data.crypto.ETH.change24h)}>{data.crypto.ETH.change24h >= 0 ? "+" : ""}{data.crypto.ETH.change24h.toFixed(2)}%</span></span>}
@@ -270,7 +270,7 @@ export default function MarketDashboard() {
             <h2 className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">Economic Calendar</h2>
           </div>
           <ExpandableRiskAlert />
-          <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "#111112" }}>
+          <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "var(--surface-2)" }}>
             <div className="px-4 py-2.5 border-b border-white/10 flex items-center justify-between flex-wrap gap-1">
               <span className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">All Events — This Week</span>
               <span className="text-[10px] font-mono text-neutral-600">EDT</span>
@@ -280,7 +280,7 @@ export default function MarketDashboard() {
               {ECONOMIC_EVENTS.map((evt, i) => <ExpandableEventCard key={i} event={evt} />)}
             </div>
           </div>
-          <div className="rounded-xl p-4 border border-white/10" style={{ background: "#111112" }}>
+          <div className="rounded-xl p-4 border border-white/10" style={{ background: "var(--surface-2)" }}>
             <div className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase mb-3">Market Bias</div>
             <div className="flex items-center gap-3 mb-2">
               <span className="text-xs text-white font-semibold">Short-Term</span>
@@ -299,7 +299,7 @@ export default function MarketDashboard() {
             <h2 className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">Session Price Boundaries</h2>
             <span className="text-[10px] font-mono text-neutral-600">| Last Updated {lastUpdated}</span>
           </div>
-          <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "#111112" }}>
+          <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "var(--surface-2)" }}>
             <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-white">/NQ</span>
@@ -309,7 +309,7 @@ export default function MarketDashboard() {
             </div>
             <LevelTable levels={levels.NQ} />
           </div>
-          <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "#111112" }}>
+          <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "var(--surface-2)" }}>
             <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-white">/ES</span>

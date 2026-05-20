@@ -1,8 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ededed;
+  --surface: #111112;
+  --surface-2: #1A1A1A;
+  --border: rgba(255,255,255,0.1);
+  --text-primary: #ededed;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --accent: #BFFF00;
+  --accent-text: #000000;
+}
+
+[data-theme="light"] {
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --surface: #FFFFFF;
+  --surface-2: #F1F5F9;
+  --border: rgba(0,0,0,0.1);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --accent: #1D4ED8;
+  --accent-text: #FFFFFF;
 }
 
 @theme inline {
@@ -12,11 +33,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 body {
@@ -24,3 +42,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Light mode overrides for inline style-based components */
+[data-theme="light"] .bg-black { background-color: var(--surface) !important; }
+[data-theme="light"] .bg-neutral-900 { background-color: var(--surface-2) !important; }
+[data-theme="light"] .bg-neutral-800 { background-color: var(--surface) !important; }
+[data-theme="light"] .bg-neutral-950 { background-color: var(--background) !important; }
