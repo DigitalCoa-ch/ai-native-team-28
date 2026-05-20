@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Globe from "./components/Globe";
 
 type Impact = "high" | "medium" | "low";
 interface EconEvent { time: string; country: string; name: string; impact: Impact; forecast?: string; previous?: string; actual?: string; description?: string; whyItMatters?: string; }
@@ -174,9 +175,7 @@ function ExpandableRiskAlert() {
 
 export default function MarketDashboard() {
   const [time, setTime] = useState("");
-  const [path, setPath] = useState("/");
   useEffect(() => {
-    setPath(window.location.pathname);
     const update = () => {
       const now = new Date();
       setTime(
@@ -192,25 +191,13 @@ export default function MarketDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full flex flex-col" style={{ background: "#000000" }}>
-      <header className="flex items-center justify-between px-6 py-3 border-b border-white/10" style={{ background: "#0A0A0A" }}>
-          <div className="flex items-center gap-3">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <rect x="2" y="2" width="20" height="20" rx="3" stroke="#BFFF00" strokeWidth="1.5"/>
-              <path d="M7 13l4-4 4 4 6-6" stroke="#BFFF00" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-            <span className="text-white font-bold tracking-tight text-sm">MACRO</span>
-            <span className="text-lime-400 font-bold tracking-tight text-sm">TRADING</span>
-            <span className="text-[10px] font-mono text-neutral-600 ml-1">v2.0</span>
-          </div>
-          <div className="flex items-center gap-5">
-            <LiveBadge />
-            <span className="text-xs font-mono text-neutral-500">{time}</span>
-            <span className="text-xs font-mono text-neutral-500">May 19, 2026</span>
-          </div>
-        </header>
+    <div className="min-h-screen w-full relative overflow-hidden" style={{ background: "#000000" }}>
+      {/* Globe background */}
+      <div className="absolute inset-0 z-0 opacity-40" style={{ pointerEvents: "none" }}>
+        <Globe />
+      </div>
 
-      <main className="grid grid-cols-3 gap-5 p-6 max-w-[1600px] mx-auto">
+      <main className="relative z-10 grid grid-cols-3 gap-5 p-6 max-w-[1600px] mx-auto">
         {/* Column 1: Calendar */}
         <section className="flex flex-col gap-4">
           <div className="flex items-center gap-2">

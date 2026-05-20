@@ -12,7 +12,7 @@ export default function AppShell({ children }: AppShellProps) {
   useEffect(() => { setPath(window.location.pathname); }, []);
   return (
     <>
-      <NavBar currentPath={path} />
+      <NavBar />
       <div className="flex-1">{children}</div>
     </>
   );
