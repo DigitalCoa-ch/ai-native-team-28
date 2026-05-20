@@ -239,7 +239,7 @@ export default function MarketDashboard() {
             <span className="text-xs font-mono text-neutral-500">
               FX + Crypto + Commodities + Indices&nbsp;
               <span className="text-neutral-600">|</span>&nbsp;
-              Updated {lastUpdated}
+              <span className="text-lime-400">Updated {lastUpdated}</span>
             </span>
           )}
           {data && (
@@ -277,9 +277,10 @@ export default function MarketDashboard() {
           </div>
           <ExpandableRiskAlert />
           <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "#111112" }}>
-            <div className="px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
+            <div className="px-4 py-2.5 border-b border-white/10 flex items-center justify-between flex-wrap gap-1">
               <span className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">All Events — This Week</span>
               <span className="text-[10px] font-mono text-neutral-600">EDT</span>
+              <span className="text-[10px] font-mono text-neutral-600">Last Updated: {lastUpdated}</span>
             </div>
             <div className="divide-y divide-white/5">
               {ECONOMIC_EVENTS.map((evt, i) => <ExpandableEventCard key={i} event={evt} />)}
@@ -299,9 +300,10 @@ export default function MarketDashboard() {
 
         {/* Column 2: Price Levels */}
         <section className="flex flex-col gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#BFFF00" strokeWidth="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
             <h2 className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">Session Price Boundaries</h2>
+            <span className="text-[10px] font-mono text-neutral-600">| Last Updated {lastUpdated}</span>
           </div>
           <div className="rounded-xl overflow-hidden border border-white/10" style={{ background: "#111112" }}>
             <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
@@ -327,9 +329,10 @@ export default function MarketDashboard() {
 
         {/* Column 3: Scenarios */}
         <section className="flex flex-col gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#BFFF00" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             <h2 className="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">Scenario Grid</h2>
+            <span className="text-[10px] font-mono text-neutral-600">| Last Updated {lastUpdated}</span>
           </div>
           <div className="flex flex-col gap-3">
             {SCENARIOS.map((s, i) => <ScenarioCard key={i} scenario={s} />)}
