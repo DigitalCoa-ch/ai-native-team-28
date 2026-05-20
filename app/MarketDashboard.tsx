@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import Globe from "./components/Globe";
 
 type Impact = "high" | "medium" | "low";
 
@@ -221,11 +220,6 @@ export default function MarketDashboard() {
 
   return (
     <div className="min-h-screen w-full relative overflow-hidden" style={{ background: "#000000" }}>
-      {/* Globe background */}
-      <div className="absolute inset-0 z-0 opacity-40" style={{ pointerEvents: "none" }}>
-        <Globe />
-      </div>
-
       {/* Live ticker tape */}
       {data && <TickerTape data={data} />}
 
